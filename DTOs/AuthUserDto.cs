@@ -11,4 +11,17 @@ namespace DatingApp.API.DTOs
         [EmailAddress]
         public string Email {get; set;}
     }
+
+    public class AuthUserTokenDTO
+    {
+        public string Username {get;set;}
+        public string Token {get;set;}
+    }
+
+    public class UserPass
+    {
+        public string Username {get;set;}
+        [Required]
+        public string Password {get; set;}
+    }
 }

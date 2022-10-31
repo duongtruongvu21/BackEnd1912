@@ -33,3 +33,15 @@ C:\Users\Vu\Desktop\Code\Api\DatingApp.API\bin\Debug\net6.0\Microsoft.EntityFram
 C:\Users\Vu\Desktop\Code\Api\DatingApp.API\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
 C:\Users\Vu\Desktop\Code\Api\DatingApp.API\bin\Debug\net6.0\MySqlConnector.dll
 C:\Users\Vu\Desktop\Code\Api\DatingApp.API\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\Vu\Desktop\Code\Api\DatingApp.API\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Vu\Desktop\Code\Api\DatingApp.API\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Vu\Desktop\Code\Api\DatingApp.API\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Vu\Desktop\Code\Api\DatingApp.API\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Vu\Desktop\Code\Api\DatingApp.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Vu\Desktop\Code\Api\DatingApp.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Vu\Desktop\Code\Api\DatingApp.API\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Vu\Desktop\Code\Api\DatingApp.API\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Vu\Desktop\Code\Api\DatingApp.API\bin\Debug\net6.0\Data\Seed\users.json
+C:\Users\Vu\Desktop\Code\Api\DatingApp.API\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Vu\Desktop\Code\Api\DatingApp.API\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\Vu\Desktop\Code\Api\DatingApp.API\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
