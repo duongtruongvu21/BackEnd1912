@@ -17,66 +17,39 @@ namespace DatingApp.API.Controllers
     {
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;
+        private readonly IAuthUserService _authUserService;
 
-        public AuthController(DataContext context, ITokenService tokenService)
+        public AuthController(DataContext context, ITokenService tokenService, IAuthUserService authUserService)
         {
             _context = context;
             _tokenService = tokenService;
+            _authUserService = authUserService;
         }
 
 
         [HttpPost("register")]
-        public IActionResult Register([FromBody] AuthUserDto authUserDto)
+        public IActionResult Register([FromBody] RegisterUserDto authUserDto)
         {
-            authUserDto.Username = authUserDto.Username.ToLower();
-            if (_context.AppUsers.Any(u => u.Username == authUserDto.Username))
+            try
             {
-                return BadRequest("Us is already exist");
+                return Ok(_authUserService.Register(authUserDto));
             }
-
-            using var hmac = new HMACSHA512();
-            var passwordByte = Encoding.UTF8.GetBytes(authUserDto.Password);
-            var newUs = new User()
+            catch (BadHttpRequestException ex)
             {
-                Username = authUserDto.Username,
-                PasswordSalt = hmac.Key,
-                PasswordHashed = hmac.ComputeHash(passwordByte)
-            };
-
-            _context.AppUsers.Add(newUs);
-            _context.SaveChanges();
-
-            var token = _tokenService.CreateToken(newUs.Username);
-
-            return Ok(token);
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost("login")]
         public IActionResult Login([FromBody] UserPass authUserDto)
         {
-            authUserDto.Username = authUserDto.Username.ToLower();
-            var currentUser = _context.AppUsers.FirstOrDefault(u => u.Username == authUserDto.Username);
-
-            if (currentUser == null)
+            try
             {
-                return Unauthorized("Không tồn tại tài khoản này.");
+                return Ok(_authUserService.Login(authUserDto));
             }
-
-            using (var hmac = new HMACSHA512(currentUser.PasswordSalt))
+            catch (UnauthorizedAccessException ex)
             {
-                var passwordBytes = hmac.ComputeHash(Encoding.UTF8.GetBytes(authUserDto.Password));
-
-                for (int i = 0; i < currentUser.PasswordHashed.Length; i++)
-                {
-                    if (currentUser.PasswordHashed[i] != passwordBytes[i])
-                    {
-                        return Unauthorized("Sai mật khẩu.");
-                    }
-                }
-
-                var token = _tokenService.CreateToken(currentUser.Username);
-
-                return Ok(token);
+                return Unauthorized(ex.Message);
             }
         }
 

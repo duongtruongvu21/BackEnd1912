@@ -1,29 +1,42 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace DatingApp.API.Data.Entities
+namespace DatingApp.API.DTOs
 {
-    public class User
+    public class RegisterUserDto
     {
-        public int Id { get; set; }
         [Required]
-        [MaxLength(32)]
+        [MaxLength(256)]
         public string Username { get; set; }
-        [MaxLength(64)]
+
+        [Required]
+        [MaxLength(256)]
+        public string Password { get; set; }
+
+        [Required]
+        [MaxLength(256)]
         public string Email { get; set; }
 
-        public byte[] PasswordHashed { get; set; }
-        public byte[] PasswordSalt { get; set; }
+        [Required]
         public DateTime DateOfBirth { get; set; }
+
+        [Required]
         [MaxLength(32)]
         public string KnownAs { get; set; }
-        [MaxLength(8)]
+
+        [Required]
+        [MaxLength(6)]
         public string Gender { get; set; }
+
+        [Required]
         [MaxLength(512)]
-        public string Introdution { get; set; }
+        public string Introduction { get; set; }
+
+        [Required]
+        [MaxLength(32)]
         public string City { get; set; }
+
+        [Required]
         [MaxLength(256)]
         public string Avatar { get; set; }
-        public DateTime? CreateAt { get; set; }
-        public DateTime? UpdateAt { get; set; }
     }
 }

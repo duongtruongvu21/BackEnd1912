@@ -1,5 +1,6 @@
 using System.Text;
 using DatingApp.API.Data;
+using DatingApp.API.Data.Repositories;
 using DatingApp.API.Data.Seed;
 using DatingApp.API.Profilespace;
 using DatingApp.API.Services;
@@ -20,7 +21,7 @@ services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "_myCORS",
-                      policy  =>
+                      policy =>
                       {
                           policy.WithOrigins("*")
                           .AllowAnyMethod().AllowAnyHeader();
@@ -37,6 +38,8 @@ services.AddDbContext<DataContext>(
         .EnableDetailedErrors()
 );
 
+services.AddScoped<IUserRepository, UserRepository>();
+services.AddScoped<IAuthUserService, AuthService>();
 services.AddScoped<IMemberService, MemberService>();
 services.AddScoped<ITokenService, TokenService>();
 services.AddAutoMapper(typeof(UserMapperProfile).Assembly);
@@ -61,12 +64,13 @@ var app = builder.Build();
 using var scope = app.Services.CreateScope();
 var serviceProvider = scope.ServiceProvider;
 
-try 
+try
 {
     var context = serviceProvider.GetRequiredService<DataContext>();
     context.Database.Migrate();
     Seed.SeedUser(context);
-} catch(Exception e)
+}
+catch (Exception e)
 {
     var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
     logger.LogError(e, "Migration Faile!!");
